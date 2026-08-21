@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>Birthday Surprise 🎁</title>
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+
+<style>
+
+/* =====================================================
+   BASIC RESET
+   ===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "Baloo 2", sans-serif;
+    background: #16070f;
+    color: white;
+}
+
+
+/* =====================================================
+   MAIN APP
+   ===================================================== */
+
+#app {
+
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(130, 30, 80, 0.15),
+            transparent 45%
+        ),
+        #190811;
+}
+
+
+/* =====================================================
+   STARS
+   ===================================================== */
+
+.stars {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+}
+
+.star {
+
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    background: #f6d98b;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px #f6d98b;
+
+    animation:
+        twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+
+    from {
+        opacity: .2;
+        transform: scale(.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+
+/* =====================================================
+   GIFT SCREEN
+   ===================================================== */
+
+#giftScreen {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 10;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    background: #470914;
+
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   CURTAINS
+   ===================================================== */
+
+.curtain {
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    width: 51%;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #6c0712 0px,
+            #8d0b18 35px,
+            #56050e 70px,
+            #950d18 105px
+        );
+
+    box-shadow:
+        inset -15px 0 30px rgba(0,0,0,.4);
+
+    transition:
+        transform 1.5s cubic-bezier(.7,0,.2,1);
+}
+
+.curtain.left {
+
+    left: 0;
+}
+
+.curtain.right {
+
+    right: 0;
+
+    box-shadow:
+        inset 15px 0 30px rgba(0,0,0,.4);
+}
+
+
+/* Curtain opening */
+
+#giftScreen.open .curtain.left {
+
+    transform:
+        translateX(-105%);
+}
+
+#giftScreen.open .curtain.right {
+
+    transform:
+        translateX(105%);
+}
+
+
+/* =====================================================
+   CENTER GOLD LINE
+   ===================================================== */
+
+.goldLine {
+
+    position: absolute;
+
+    width: 7px;
+    height: 100%;
+
+    background: #e9c45c;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    transition:
+        opacity .5s ease;
+}
+
+#giftScreen.open .goldLine {
+
+    opacity: 0;
+}
+
+
+/* =====================================================
+   GIFT BUTTON
+   ===================================================== */
+
+.giftButton {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 205px;
+    height: 205px;
+
+    border-radius: 50%;
+
+    border: 6px solid #5a180c;
+
+    background: #eec96c;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 80px;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    box-shadow:
+        0 0 40px rgba(239, 195, 77, .35);
+
+    animation:
+        giftFloat 2s ease-in-out infinite;
+
+    transition:
+        transform .2s ease;
+}
+
+.giftButton:active {
+
+    transform: scale(.95);
+}
+
+@keyframes giftFloat {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+.giftTitle {
+
+    position: relative;
+
+    z-index: 5;
+
+    margin-top: 35px;
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    color: #ffeaa2;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+.giftSubtitle {
+
+    position: relative;
+
+    z-index: 5;
+
+    margin-top: 8px;
+
+    font-size: 20px;
+
+    color: #fff;
+
+    opacity: .85;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   CAKE SCREEN
+   ===================================================== */
+
+#cakeScreen {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    padding-top: 20px;
+
+    cursor: pointer;
+}
+
+
+#cakeScreen.active {
+
+    display: flex;
+}
+
+
+/* =====================================================
+   INSTRUCTION
+   ===================================================== */
+
+.instruction {
+
+    position: absolute;
+
+    top: 9%;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 340px;
+
+    padding: 18px 22px;
+
+    border-radius: 22px;
+
+    background: white;
+
+    color: #24151d;
+
+    box-shadow:
+        0 6px 0 rgba(0,0,0,.4);
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+.instruction h2 {
+
+    font-size: 21px;
+
+    line-height: 1.15;
+}
+
+.instruction p {
+
+    margin-top: 8px;
+
+    color: #765e67;
+
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   FAIRY
+   ===================================================== */
+
+.fairy {
+
+    position: absolute;
+
+    right: 10%;
+
+    top: 18%;
+
+    font-size: 68px;
+
+    pointer-events: none;
+
+    animation:
+        fairyFloat 2s ease-in-out infinite;
+}
+
+@keyframes fairyFloat {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            translateY(-10px)
+            rotate(3deg);
+    }
+}
+
+
+/* =====================================================
+   CAKE CONTAINER
+   ===================================================== */
+
+.cake {
+
+    position: relative;
+
+    width: 430px;
+    height: 420px;
+
+    margin-top: 180px;
+
+    flex-shrink: 0;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   BOTTOM CAKE
+   ===================================================== */
+
+.cakeBottom {
+
+    position: absolute;
+
+    width: 390px;
+    height: 155px;
+
+    left: 20px;
+
+    bottom: 45px;
+
+    border-radius:
+        12px 12px 25px 25px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffb18c 0%,
+            #ff9874 75%,
+            #f58263 100%
+        );
+
+    border: 7px solid #672421;
+
+    box-shadow:
+        inset 0 -14px
+        rgba(180,55,50,.18);
+}
+
+
+/* =====================================================
+   TOP CAKE
+   ===================================================== */
+
+.cakeTop {
+
+    position: absolute;
+
+    width: 300px;
+    height: 135px;
+
+    left: 65px;
+
+    bottom: 180px;
+
+    border-radius:
+        22px 22px 5px 5px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffc2d3 0%,
+            #ff9db8 100%
+        );
+
+    border: 7px solid #672421;
+
+    box-shadow:
+        inset 0 -12px
+        rgba(190,60,90,.15);
+}
+
+
+/* =====================================================
+   CAKE PLATE
+   ===================================================== */
+
+.cakePlate {
+
+    position: absolute;
+
+    width: 450px;
+    height: 32px;
+
+    left: -10px;
+
+    bottom: 20px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #fff1ae,
+            #d9b75c
+        );
+
+    border: 4px solid #62451d;
+
+    box-shadow:
+        0 5px 10px rgba(0,0,0,.3);
+}
+
+
+/* =====================================================
+   CAKE DECORATIONS
+   ===================================================== */
+
+.dots {
+
+    position: absolute;
+
+    inset: 0;
+}
+
+
+/* Top dots */
+
+.cakeTop .dot {
+
+    position: absolute;
+
+    width: 17px;
+    height: 17px;
+
+    border-radius: 50%;
+
+    background: #70292c;
+}
+
+.cakeTop .dot:nth-child(1) {
+
+    left: 50px;
+    top: 90px;
+}
+
+.cakeTop .dot:nth-child(2) {
+
+    left: 110px;
+    top: 90px;
+
+    background: #f5c51c;
+}
+
+.cakeTop .dot:nth-child(3) {
+
+    left: 170px;
+    top: 90px;
+}
+
+.cakeTop .dot:nth-child(4) {
+
+    left: 230px;
+    top: 90px;
+
+    background: #3199e5;
+}
+
+.cakeTop .dot:nth-child(5) {
+
+    left: 260px;
+    top: 90px;
+}
+
+
+/* Bottom dots */
+
+.cakeBottom .dot {
+
+    position: absolute;
+
+    width: 17px;
+    height: 17px;
+
+    border-radius: 50%;
+
+    background: #70292c;
+}
+
+.cakeBottom .dot:nth-child(1) {
+
+    left: 55px;
+    top: 105px;
+}
+
+.cakeBottom .dot:nth-child(2) {
+
+    left: 125px;
+    top: 105px;
+
+    background: #ef55a2;
+}
+
+.cakeBottom .dot:nth-child(3) {
+
+    left: 195px;
+    top: 105px;
+}
+
+.cakeBottom .dot:nth-child(4) {
+
+    left: 265px;
+    top: 105px;
+
+    background: #4bc477;
+}
+
+
+/* =====================================================
+   CANDLES
+   ===================================================== */
+
+.candles {
+
+    position: absolute;
+
+    left: 50%;
+    top: 20px;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    gap: 35px;
+
+    z-index: 5;
+}
+
+
+.candle {
+
+    position: relative;
+
+    width: 70px;
+    height: 105px;
+
+    border-radius:
+        18px 18px 8px 8px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 60px;
+
+    font-weight: 800;
+
+    color: white;
+
+    text-shadow:
+        3px 4px rgba(0,0,0,.2);
+
+    border:
+        5px solid rgba(100,30,30,.3);
+
+    box-shadow:
+        inset 0 8px
+        rgba(255,255,255,.25);
+}
+
+
+.candle:nth-child(1) {
+
+    background:
+        linear-gradient(
+            #ff5b9e,
+            #e9377c
+        );
+}
+
+.candle:nth-child(2) {
+
+    background:
+        linear-gradient(
+            #ffe633,
+            #eab800
+        );
+}
+
+
+/* =====================================================
+   FLAMES
+   ===================================================== */
+
+.flame {
+
+    position: absolute;
+
+    width: 24px;
+    height: 35px;
+
+    top: -43px;
+
+    border-radius:
+        50% 50% 50% 0;
+
+    background: #ffad20;
+
+    transform:
+        rotate(-45deg);
+
+    box-shadow:
+        0 0 15px #ffad20,
+        0 0 30px #ff7100;
+
+    animation:
+        flameAnimation .7s
+        infinite alternate;
+}
+
+
+@keyframes flameAnimation {
+
+    from {
+
+        transform:
+            rotate(-45deg)
+            scale(1);
+    }
+
+    to {
+
+        transform:
+            rotate(-42deg)
+            scale(1.15);
+    }
+}
+
+
+.flame.off {
+
+    display: none;
+}
+
+
+/* =====================================================
+   FINAL SCREEN
+   ===================================================== */
+
+#finalScreen {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: none;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    overflow-y: auto;
+
+    padding: 55px 20px 50px;
+}
+
+
+#finalScreen.active {
+
+    display: flex;
+}
+
+
+.finalHeading {
+
+    font-size: 20px;
+
+    letter-spacing: 6px;
+
+    font-weight: 800;
+
+    color: #ffeaa0;
+}
+
+
+.name {
+
+    margin-top: 5px;
+
+    font-size: 68px;
+
+    line-height: 1;
+
+    color: white;
+
+    font-weight: 800;
+
+    text-shadow:
+        4px 5px #d52a39,
+        7px 8px rgba(0,0,0,.35);
+
+    text-align: center;
+}
+
+
+.ageBadge {
+
+    margin-top: 25px;
+
+    padding: 10px 30px;
+
+    border-radius: 35px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffd75c,
+            #ffae39
+        );
+
+    color: #542016;
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 0 #75261d;
+}
+
+
+/* =====================================================
+   PHOTOS
+   ===================================================== */
+
+.photos {
+
+    display: flex;
+
+    gap: 25px;
+
+    margin-top: 50px;
+
+    justify-content: center;
+}
+
+
+.photo {
+
+    width: 230px;
+    height: 270px;
+
+    background: white;
+
+    padding: 9px;
+
+    border-radius: 30px;
+
+    transform:
+        rotate(-6deg);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.35);
+}
+
+
+.photo:nth-child(2) {
+
+    transform:
+        rotate(5deg);
+}
+
+
+.photo img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+
+    display: block;
+}
+
+
+.heart {
+
+    position: absolute;
+
+    font-size: 50px;
+
+    margin-left: 400px;
+
+    margin-top: -210px;
+
+    animation:
+        heart 1.5s
+        infinite alternate;
+}
+
+
+@keyframes heart {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform:
+            scale(1.15)
+            rotate(5deg);
+    }
+}
+
+
+/* =====================================================
+   NOTE
+   ===================================================== */
+
+.note {
+
+    width: min(650px, 92%);
+
+    margin-top: 45px;
+
+    background: #fffafa;
+
+    color: #302029;
+
+    border-radius: 28px;
+
+    padding: 22px 28px 30px;
+
+    box-shadow:
+        0 8px 0
+        rgba(80,20,40,.55);
+}
+
+
+.noteHeader {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    color: #6a4b58;
+
+    padding-bottom: 15px;
+
+    border-bottom:
+        3px dashed #ead6dc;
+}
+
+
+.noteHeart {
+
+    color: #e83485;
+
+    font-size: 27px;
+}
+
+
+.noteText {
+
+    padding-top: 25px;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    line-height: 1.45;
+
+    white-space: pre-line;
+}
+
+
+/* =====================================================
+   FINAL BUTTON
+   ===================================================== */
+
+.loveButton {
+
+    margin-top: 45px;
+
+    padding: 17px 40px;
+
+    border:
+        2px solid
+        rgba(255,255,255,.35);
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,.13);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    backdrop-filter:
+        blur(10px);
+}
+
+
+/* =====================================================
+   CONFETTI
+   ===================================================== */
+
+.confetti {
+
+    position: fixed;
+
+    width: 10px;
+    height: 18px;
+
+    top: -30px;
+
+    z-index: 100;
+
+    animation:
+        fall linear forwards;
+}
+
+
+@keyframes fall {
+
+    to {
+
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:600px) {
+
+    .giftButton {
+
+        width: 160px;
+        height: 160px;
+
+        font-size: 62px;
+    }
+
+
+    .giftTitle {
+
+        font-size: 27px;
+    }
+
+
+    .giftSubtitle {
+
+        font-size: 17px;
+    }
+
+
+    .instruction {
+
+        width: 310px;
+
+        top: 8%;
+    }
+
+
+    .fairy {
+
+        right: 5%;
+
+        top: 24%;
+
+        font-size: 55px;
+    }
+
+
+    .cake {
+
+        width: 360px;
+        height: 350px;
+
+        margin-top: 180px;
+
+        transform:
+            scale(.85);
+
+        transform-origin:
+            center center;
+    }
+
+
+    .cakeBottom {
+
+        width: 330px;
+        height: 125px;
+
+        left: 15px;
+
+        bottom: 40px;
+    }
+
+
+    .cakeTop {
+
+        width: 250px;
+        height: 110px;
+
+        left: 55px;
+
+        bottom: 150px;
+    }
+
+
+    .cakePlate {
+
+        width: 370px;
+
+        left: -5px;
+
+        bottom: 15px;
+    }
+
+
+    .candles {
+
+        gap: 25px;
+
+        top: 15px;
+    }
+
+
+    .candle {
+
+        width: 58px;
+        height: 90px;
+
+        font-size: 50px;
+    }
+
+
+    .flame {
+
+        width: 20px;
+        height: 30px;
+
+        top: -38px;
+    }
+
+
+    .finalHeading {
+
+        font-size: 16px;
+    }
+
+
+    .name {
+
+        font-size: 52px;
+    }
+
+
+    .ageBadge {
+
+        font-size: 19px;
+    }
+
+
+    .photos {
+
+        gap: 12px;
+
+        margin-top: 35px;
+    }
+
+
+    .photo {
+
+        width: 155px;
+        height: 190px;
+
+        border-radius: 22px;
+    }
+
+
+    .heart {
+
+        font-size: 35px;
+
+        margin-left: 275px;
+
+        margin-top: -150px;
+    }
+
+
+    .note {
+
+        margin-top: 35px;
+
+        padding: 18px;
+    }
+
+
+    .noteText {
+
+        font-size: 18px;
+    }
+
+
+    .loveButton {
+
+        font-size: 18px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="app">
+
+
+    <!-- =================================================
+         STARS
+         ================================================= -->
+
+    <div class="stars">
+
+        <span class="star"
+              style="left:5%;top:25%"></span>
+
+        <span class="star"
+              style="left:15%;top:10%"></span>
+
+        <span class="star"
+              style="left:28%;top:18%"></span>
+
+        <span class="star"
+              style="left:42%;top:8%"></span>
+
+        <span class="star"
+              style="left:55%;top:25%"></span>
+
+        <span class="star"
+              style="left:70%;top:12%"></span>
+
+        <span class="star"
+              style="left:82%;top:30%"></span>
+
+        <span class="star"
+              style="left:94%;top:18%"></span>
+
+        <span class="star"
+              style="left:20%;top:50%"></span>
+
+        <span class="star"
+              style="left:75%;top:60%"></span>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SCREEN 1 — GIFT
+         ================================================= -->
+
+    <section id="giftScreen">
+
+        <div class="curtain left"></div>
+
+        <div class="curtain right"></div>
+
+        <div class="goldLine"></div>
+
+
+        <button
+            class="giftButton"
+            id="giftButton"
+            type="button">
+
+            🎁
+
+        </button>
+
+
+        <h1 class="giftTitle">
+
+            Tap to open your gift
+
+        </h1>
+
+
+        <p class="giftSubtitle">
+
+            A surprise is waiting for you 🎁
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SCREEN 2 — CAKE
+         ================================================= -->
+
+    <section id="cakeScreen">
+
+
+        <div class="instruction">
+
+            <h2>
+
+                Click anywhere to blow
+                out your candles ✨
+
+            </h2>
+
+
+            <p>
+
+                Make a wish,
+                <span id="wishName"></span>!
+
+            </p>
+
+        </div>
+
+
+        <div class="fairy">
+
+            🧚‍♀️✨
+
+        </div>
+
+
+
+        <div class="cake">
+
+
+            <!-- CANDLES -->
+
+            <div class="candles">
+
+
+                <div class="candle">
+
+                    <span id="age1">2</span>
+
+                    <div class="flame"></div>
+
+                </div>
+
+
+                <div class="candle">
+
+                    <span id="age2">5</span>
+
+                    <div class="flame"></div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- TOP CAKE -->
+
+            <div class="cakeTop">
+
+                <div class="dots">
+
+                    <span class="dot"></span>
+
+                    <span class="dot"></span>
+
+                    <span class="dot"></span>
+
+                    <span class="dot"></span>
+
+                    <span class="dot"></span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BOTTOM CAKE -->
+
+            <div class="cakeBottom">
+
+                <div class="dots">
+
+                    <span class="dot"></span>
+
+                    <span class="dot"></span>
+
+                    <span class="dot"></span>
+
+                    <span class="dot"></span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PLATE -->
+
+            <div class="cakePlate"></div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SCREEN 3 — FINAL
+         ================================================= -->
+
+    <section id="finalScreen">
+
+
+        <div class="finalHeading">
+
+            HAPPY BIRTHDAY
+
+        </div>
+
+
+        <div
+            class="name"
+            id="finalName">
+
+            Aanya!
+
+        </div>
+
+
+        <div class="ageBadge">
+
+            ✨ Turning
+            <span id="finalAge">25</span>
+            today
+
+        </div>
+
+
+
+        <!-- PHOTOS -->
+
+        <div class="photos">
+
+
+            <div class="photo">
+
+                <img
+                    src="photo1.jpg"
+                    alt="Memory 1">
+
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="photo2.jpg"
+                    alt="Memory 2">
+
+            </div>
+
+
+        </div>
+
+
+        <div class="heart">
+
+            💗
+
+        </div>
+
+
+
+        <!-- NOTE -->
+
+        <div class="note">
+
+
+            <div class="noteHeader">
+
+                <span class="noteHeart">
+                    ♥
+                </span>
+
+                <span>
+                    A note from Ksceesh
+                </span>
+
+            </div>
+
+
+            <div
+                class="noteText"
+                id="birthdayNote">
+
+                Happy birthday!
+
+            </div>
+
+
+        </div>
+
+
+        <div class="loveButton">
+
+            🎁 Made especially for you
+
+        </div>
+
+
+    </section>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   🎵 MUSIC
+   ===================================================== */
+
+const music = new Audio("music.mp3");
+
+music.loop = true;
+
+music.volume = 0.6;
+
+
+/* =====================================================
+   ✨ CUSTOMIZE YOUR FRIEND'S DETAILS HERE
+   ===================================================== */
+
+const birthday = {
+
+    name: "Ayrannnn",
+
+    age: 24,
+
+    note: `
+
+Happiest birthday Ayrann! You're now a 24 y/o senior citizen. 🥳
+
+Have a best, greatest, and much happier year.
+
+May God bless you with a mountain within your room so you can just jump in during your weekends without having to worry about work 😋.
+
+And I hope this year brings you everything you've been wishing for.
+
+You're doing great. Keep growing, stay happy like you always do.
+
+Best wishes. 🎂
+
+~ ksceesh 🫶✨
+
+`
+
+};
+
+
+/* =====================================================
+   PUT DETAILS INTO PAGE
+   ===================================================== */
+
+document.getElementById("wishName").textContent =
+    birthday.name;
+
+document.getElementById("finalName").textContent =
+    birthday.name + "!";
+
+document.getElementById("finalAge").textContent =
+    birthday.age;
+
+document.getElementById("birthdayNote").textContent =
+    birthday.note;
+
+
+/* =====================================================
+   AGE → CANDLE NUMBERS
+   ===================================================== */
+
+const ageString =
+    String(birthday.age);
+
+
+if (ageString.length >= 2) {
+
+    document.getElementById("age1").textContent =
+        ageString[0];
+
+    document.getElementById("age2").textContent =
+        ageString[1];
+
+}
+
+else {
+
+    document.getElementById("age1").textContent =
+        "";
+
+    document.getElementById("age2").textContent =
+        ageString;
+}
+
+
+/* =====================================================
+   🎁 OPEN GIFT
+   ===================================================== */
+
+let giftOpened = false;
+
+
+function openGift() {
+
+    if (giftOpened) return;
+
+    giftOpened = true;
+
+
+    /* Start music */
+
+    music.currentTime = 0;
+
+    music.play().catch(function(error) {
+
+        console.log(
+            "Music playback error:",
+            error
+        );
+
+    });
+
+
+    /* Open curtains */
+
+    const giftScreen =
+        document.getElementById("giftScreen");
+
+    giftScreen.classList.add("open");
+
+
+    /* Show cake after curtain animation */
+
+    setTimeout(function() {
+
+        giftScreen.style.display =
+            "none";
+
+
+        document
+            .getElementById("cakeScreen")
+            .classList.add("active");
+
+
+    }, 1500);
+
+}
+
+
+/* =====================================================
+   GIFT CLICK
+   ===================================================== */
+
+/*
+   The button itself gets the click.
+   We also make the whole gift screen clickable,
+   so it works even if the user taps slightly outside
+   the gift.
+*/
+
+
+document
+    .getElementById("giftButton")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            openGift();
+
+        }
+    );
+
+
+document
+    .getElementById("giftScreen")
+    .addEventListener(
+        "click",
+        function() {
+
+            openGift();
+
+        }
+    );
+
+
+/* =====================================================
+   🕯️ BLOW OUT CANDLES
+   ===================================================== */
+
+let candlesBlown = false;
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+
+        /* Ignore clicks before cake appears */
+
+        const cakeScreen =
+            document.getElementById(
+                "cakeScreen"
+            );
+
+
+        if (
+            !cakeScreen.classList.contains(
+                "active"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        /* Already blown */
+
+        if (candlesBlown) {
+
+            return;
+
+        }
+
+
+        candlesBlown = true;
+
+
+        /* Turn flames off */
+
+        document
+            .querySelectorAll(".flame")
+            .forEach(
+                function(flame) {
+
+                    flame.classList.add(
+                        "off"
+                    );
+
+                }
+            );
+
+
+        /* Confetti */
+
+        createConfetti();
+
+
+        /* Show final screen */
+
+        setTimeout(
+            function() {
+
+
+                cakeScreen.classList.remove(
+                    "active"
+                );
+
+
+                document
+                    .getElementById(
+                        "finalScreen"
+                    )
+                    .classList.add(
+                        "active"
+                    );
+
+
+            },
+            1800
+        );
+
+    }
+);
+
+
+/* =====================================================
+   🎉 CONFETTI
+   ===================================================== */
+
+function createConfetti() {
+
+
+    const symbols = [
+
+        "✨",
+        "🎉",
+        "💗",
+        "⭐",
+        "🎊",
+        "💕"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < 70;
+        i++
+    ) {
+
+
+        const piece =
+            document.createElement(
+                "div"
+            );
+
+
+        piece.className =
+            "confetti";
+
+
+        piece.innerText =
+            symbols[
+                Math.floor(
+                    Math.random()
+                    * symbols.length
+                )
+            ];
+
+
+        piece.style.left =
+            Math.random()
+            * 100
+            + "vw";
+
+
+        piece.style.fontSize =
+            (
+                12
+                +
+                Math.random() * 20
+            )
+            + "px";
+
+
+        piece.style.animationDuration =
+            (
+                2
+                +
+                Math.random() * 3
+            )
+            + "s";
+
+
+        piece.style.animationDelay =
+            Math.random()
+            * .8
+            + "s";
+
+
+        document.body.appendChild(
+            piece
+        );
+
+
+        setTimeout(
+            function() {
+
+                piece.remove();
+
+            },
+            6000
+        );
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
